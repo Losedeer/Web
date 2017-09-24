@@ -1,0 +1,217 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd";>
+<html>
+<title>
+	the game
+</title>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		
+		<style>
+	#main{
+		height: 400px;
+		width:  400px;
+		border: 2px solid #ccccff;
+		margin: 0 auto;
+		position:relative;
+		overflow: hidden;
+
+	}
+	#container{	
+	width: 100%;
+	height: 400px;
+	position: relative;
+	top: -100px;
+	background-color:  white;
+	}
+	#score{
+		text-align: center;
+	}
+	#game{
+		text-align: center;
+	}
+.row{
+	height: 100px;
+	width: 100%;
+}
+.cell{	
+	width: 100px;	
+	height: 100px;
+	float:left;
+}
+		
+.black{
+	background: black;
+
+}
+
+		</style>
+	</head>
+
+	<body>
+		<h1 id="score">0</h1>
+		<h2 id='game'>IU : 点我啊!</h2>
+		<div id="main">
+			<div id="container">
+			</div>
+		</div>
+	</body>
+	<script>
+
+	var clock = null; //定时器
+	var state = 0; // 0为初始化  1为开始 2为暂停 3为失败
+	var speed = 2; //初始速度
+/*
+固定首先出现3个
+*/
+	function init() {
+		for(var i=0;i<4;i++){
+			crow();
+			}
+		$('main').onclick = function (ev) {
+			judge(ev);
+		}
+	}
+
+
+	function judge(ev){
+			if(state == 3){
+				return ;
+			}
+			if(ev.target.className.indexOf('black') == -1){	
+
+				fail();
+				}else{
+					ev.target.className = 'cell';
+					ev.target.parentNode.pass = 1;
+					score();
+				}
+			
+	}
+	
+		/*
+		启动动画
+		*/
+		function start() {
+			clock = window.setInterval('move()',30);
+		}
+		/*
+		动画
+		*/
+		function move() {
+			var con= $('container');
+			var top=parseInt(window.getComputedStyle(con ,null)['top']);
+			if(speed + top > 0){  //一步走过头的情况
+				top = 0;
+			}else{
+			top +=speed;  //  可调节每次下降的速度
+				 }
+
+			con.style.top = top + 'px';
+			if(top==0){
+				crow();
+				con.style.top='-100px';
+				drow();
+			}else if(top == (speed-100)){
+				 //console.log(con.lastChild);
+				 var rows = con.children;
+				 if( (rows.length == 5)&&(rows[rows.length-1].pass !== 1)){
+				 	fail();
+				 }
+			}
+		}
+		/*
+		加速函数
+		*/
+		function jiasu() {
+			if(speed == 2)
+			    {speed = 4;}
+			else if(speed == 4)
+			    {speed = 5;}
+			else if(speed == 5)
+				{speed = 10;}
+			else if(speed = 10)
+				{speed = 20;}
+			else{alert('好吧，你屌');}
+		}
+	/*
+	输，结束
+	*/
+
+	function fail() {
+		clearInterval(clock);
+		state = 3;
+		alert('智商捉急');
+	}
+	/*
+	计分
+	*/
+
+	function score() {
+		var newscore = parseInt($('score').innerHTML)+1;
+		$('score').innerHTML = newscore;
+		if(newscore % 10 == 0){
+			jiasu();
+		}
+	}
+
+	/*
+	* 创建div.row
+	*/
+	function crow() {
+		var con = $('container');
+		var row = cdiv('row');
+		var classes = createSn();
+
+		for(var i=0;i<4;i++)
+		{
+			row.appendChild(cdiv(classes[i]));
+		}
+
+		if(con.firstChild == null){
+			con.appendChild(row);
+		}else{
+			con.insertBefore(row , con.firstChild);
+		}
+		
+	}
+	/*
+	删除最后一行
+	*/
+	function drow() {
+		var con = $('container');
+		if(con.childNodes.length == 6){
+		con.removeChild(con.lastChild);
+	}
+	}
+
+	/**
+	*创建DIV，classname为类名
+	**/
+	function cdiv(className){
+		var div = document.createElement('div');
+		div.className = className;
+		return div;
+	}
+
+	/*
+	返回一个数组，随机其中一单元值为'cell black',其他3个为cell
+	*/
+	function createSn () {
+		var arr = ['cell','cell','cell','cell'];
+		var i = Math.floor(Math.random()*4);
+		arr[i] = 'cell black';
+		return arr;
+	}
+	/*
+	按ID获取对象
+	*/
+	function $(id) {
+		return document.getElementById(id);
+	}
+	init();
+	start();
+
+	</script>
+
+
+</html>

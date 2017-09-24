@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SS</title>
+<style>
+
+	/*初始化页面代码初始化*/
+	body,h1,h2,h3,h4,h5,h6,p,dl,dd,ul,ol,form,input,textarea,th,td,select{ margin:0; padding:0;}
+	em{ font-style:normal;}
+	li{ list-style:none;}
+	a{ text-decoration:none;}
+	img{ border:none; vertical-align:top;}
+	table{ border-collapse:collapse;}
+	input,textarea{ outline:none;}
+	textarea{ resize:none; overflow:auto;}
+	body{ font:12px "微软雅黑";}
+
+	body {
+    background: #1E1E1E;
+	}
+
+	#Line{
+
+		position:absolute;
+		top: 15%;
+		left:10%;
+		width: 80%;
+		height: 70%;
+		border-radius: 50%/50%;
+		border: 1px solid gray;
+		z-index: 0;
+ 
+	}
+
+	#earth{
+
+		width: 30px;
+		height: 30px;
+		border-radius: 15px;
+		background: blue;
+		position: absolute;
+		top: 50%;	
+
+	}
+</style>
+
+				
+	<script type="text/javascript">
+
+
+	window.onload = function(){
+
+		var timer = null;
+		var oEar = document.getElementById('earth');
+		var oEar_L = document.getElementById('Line');
+		var speed = 5;
+
+		//ar x0 = 
+		//var x1 = 
+		var y = parseInt(oEar_L.style.top);     // 0 为 NAN ??
+
+		alert(document.documentElement.clientWidth); 
+		alert(document.documentElement.clientHeight);
+
+		/*初始化各种浏览器每个星球所在位置*/
+		function init(){
+
+
+		}
+
+
+		/*运动函数*/
+		function move(){
+
+			oEar.style.left = parseInt(speed) +'px';
+			//alert(oEar.style.left);
+			speed++;
+			//alert(parseint(oEar.style.top));
+		}
+
+		timer = setInterval(move,30);
+
+		/*test*/
+
+	}
+
+
+
+	</script>
+
+
+</head>
+<body>
+		
+
+	<div id="Line"></div>
+	<div id="earth"></div>
+
+</body>
+</html>

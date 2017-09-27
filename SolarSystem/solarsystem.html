@@ -37,10 +37,11 @@
 
 		width: 30px;
 		height: 30px;
+		left: 9%;
 		border-radius: 15px;
 		background: blue;
 		position: absolute;
-		top: 50%;	
+		top: 49%;	
 
 	}
 </style>
@@ -51,21 +52,44 @@
 
 	window.onload = function(){
 
-		var timer = null;
 		var oEar = document.getElementById('earth');
 		var oEar_L = document.getElementById('Line');
+		var timer = null;
 		var speed = 5;
-
-		//ar x0 = 
-		//var x1 = 
-		var y = parseInt(oEar_L.style.top);     // 0 为 NAN ??
-
-		alert(document.documentElement.clientWidth); 
-		alert(document.documentElement.clientHeight);
+		var heading = true;
+		var x0 = 0;
+		var x1 = 0;
+		var a = 0;
+		var b = 0;
+		var y = 0;  // 0 为 NAN ??
+		var yn = 0;
+		var xn = 0;
+		var h = 0;
+		var k = 0;
+		//alert(document.documentElement.clientWidth); 
+		//alert(document.documentElement.clientHeight);
 
 		/*初始化各种浏览器每个星球所在位置*/
 		function init(){
-
+				//oEar.style.left = parseInt(speed) +'px';
+			 x0 = parseInt(document.documentElement.clientWidth * 0.09);
+			 x1 = parseInt(document.documentElement.clientWidth * 0.89);   // BUG  1 之前用了 var 导致x0 x1 为局部变量 这样值就赋不到 mive()里  注意写法！！ 
+			  y = parseInt(document.documentElement.clientHeight * 0.5);
+			  yn = y;
+			  a = parseInt((x1-x0)/2);									 	//a 为长轴	
+			  b = parseInt(document.documentElement.clientHeight * 0.35);	//b 为短轴
+			  h = x0 + a;
+			  k = parseInt(document.documentElement.clientHeight * 0.5);	// h,k 为椭圆中心点的坐标
+			  //alert(x0);
+			  //alert(x1);
+			  //alert(a);
+			  //alert(b);
+			  //alert(h);
+			  //alert(a/b);
+			  //alert(y);
+			  //alert(x1);
+			  //alert(parseInt(document.documentElement.clientHeight * 0.15 + document.documentElement.clientHeight*0.35));
+			speed = x0;
 
 		}
 
@@ -74,12 +98,45 @@
 		function move(){
 
 			oEar.style.left = parseInt(speed) +'px';
-			//alert(oEar.style.left);
-			speed++;
+			speed = heading ? ++speed : --speed;
+
+			yn = b * Math.sqrt(1 - (Math.pow(Math.abs(speed - h),2) / Math.pow(a,2) )  )  + k;
+
+			//y=Math.sqrt(1-Math.pow(xn/a,2))*100;
+			if(heading)
+			{
+					oEar.style.top = (yn - 4) +'px';
+			}
+			else
+			{
+				oEar.style.top = k + b + document.documentElement.clientHeight * 0.15 - yn - 7 +'px';
+			}
+			//yn = parseInt(b * Math.sqrt(1 - (Math.pow(Math.abs(speed - h),2) / Math.pow(a,2) )  )  - 1) + k;
+
+			
+
+			//oEar.style.top = parseInt(y) + 'px';
+			//oEar.style.top = parseInt(yn) +'px';
+
+			//xn = parseInt(630);
+			//y = y - Math.sqrt( Math.pow(262,2) * (1 - ( Math.pow(xn,2) / Math.pow(640,2) ) ) );
+			//y=Math.sqrt(1-Math.pow(xn/a,2))*100;
+			//alert(Math.sqrt(parseInt( b*(b*(1-(speed*speed)/(a*a) ) ) )));
+
+
+			if(parseInt(oEar.style.left) > x1)
+			{
+
+				heading = false;
+			}
+			else if(parseInt(oEar.style.left) < x0)
+			{
+				heading = true;
+			}
 			//alert(parseint(oEar.style.top));
 		}
-
-		timer = setInterval(move,30);
+		init();
+		timer = setInterval(move,10);
 
 		/*test*/
 

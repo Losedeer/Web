@@ -4,7 +4,6 @@
 	<meta charset="UTF-8">
 	<title>SS</title>
 <style>
-
 	/*初始化页面代码初始化*/
 	body,h1,h2,h3,h4,h5,h6,p,dl,dd,ul,ol,form,input,textarea,th,td,select{ margin:0; padding:0;}
 	em{ font-style:normal;}
@@ -15,13 +14,10 @@
 	input,textarea{ outline:none;}
 	textarea{ resize:none; overflow:auto;}
 	body{ font:12px "微软雅黑";}
-
 	body {
     background: #1E1E1E;
 	}
-
-	#Line{
-
+	#Line1{
 		position:absolute;
 		top: 15%;
 		left:10%;
@@ -32,28 +28,53 @@
 		z-index: 0;
  
 	}
-
+	#Line2{
+		position:absolute;
+		top: 20%;
+		left:25%;
+		width: 50%;
+		height: 50%;
+		border-radius: 50%/50%;
+		border: 1px solid gray;
+		z-index: 1;
+	}
 	#earth{
-
+		width: 46px;
+		height: 46px;
+		left: 9%;
+		border-radius: 23px;
+		background: #54FF9F;
+		position: absolute;
+		top: 49%;	
+		z-index: 2;
+	}
+	#moon{
 		width: 30px;
 		height: 30px;
 		left: 9%;
 		border-radius: 15px;
-		background: blue;
+		background: #D4D4D4;
 		position: absolute;
 		top: 49%;	
-
+		z-index: 3;
+	}
+	#sun{
+		width: 70px;
+		height: 70px;
+		left: 47%;
+		border-radius: 35px;
+		background: #EEEE00;
+		position: absolute;
+		top: 40%;	
+		z-index: 4;
 	}
 </style>
 
 				
 	<script type="text/javascript">
-
-
 	window.onload = function(){
-
 		var oEar = document.getElementById('earth');
-		var oEar_L = document.getElementById('Line');
+		var oEar_L = document.getElementById('Line1');
 		var timer = null;
 		var speed = 5;
 		var heading = true;
@@ -66,9 +87,9 @@
 		var xn = 0;
 		var h = 0;
 		var k = 0;
+		var buffer = 0;
 		//alert(document.documentElement.clientWidth); 
 		//alert(document.documentElement.clientHeight);
-
 		/*初始化各种浏览器每个星球所在位置*/
 		function init(){
 				//oEar.style.left = parseInt(speed) +'px';
@@ -90,43 +111,43 @@
 			  //alert(x1);
 			  //alert(parseInt(document.documentElement.clientHeight * 0.15 + document.documentElement.clientHeight*0.35));
 			speed = x0;
-
 		}
-
-
 		/*运动函数*/
 		function move(){
-
 			oEar.style.left = parseInt(speed) +'px';
-			speed = heading ? ++speed : --speed;
 
-			yn = b * Math.sqrt(1 - (Math.pow(Math.abs(speed - h),2) / Math.pow(a,2) )  )  + k;
-
-			//y=Math.sqrt(1-Math.pow(xn/a,2))*100;
-			if(heading)
+			if(speed > document.documentElement.clientWidth * 0.88 || speed < document.documentElement.clientWidth * 0.10)
 			{
-					oEar.style.top = (yn - 4) +'px';
+				if(buffer%2 == 0)
+				{
+					speed = heading ? ++speed : --speed;
+				}
+				buffer++;
 			}
 			else
 			{
-				oEar.style.top = k + b + document.documentElement.clientHeight * 0.15 - yn - 7 +'px';
+				speed = heading ? ++speed : --speed;
+			}
+			yn = b * Math.sqrt(1 - (Math.pow(Math.abs(speed - h),2) / Math.pow(a,2) )  )  + k;
+			//y=Math.sqrt(1-Math.pow(xn/a,2))*100;
+			if(heading)
+			{
+					oEar.style.top = (yn - 10) +'px';
+			}
+			else
+			{
+				oEar.style.top = k + b + document.documentElement.clientHeight * 0.15 - yn - 15 +'px';
 			}
 			//yn = parseInt(b * Math.sqrt(1 - (Math.pow(Math.abs(speed - h),2) / Math.pow(a,2) )  )  - 1) + k;
-
 			
-
 			//oEar.style.top = parseInt(y) + 'px';
 			//oEar.style.top = parseInt(yn) +'px';
-
 			//xn = parseInt(630);
 			//y = y - Math.sqrt( Math.pow(262,2) * (1 - ( Math.pow(xn,2) / Math.pow(640,2) ) ) );
 			//y=Math.sqrt(1-Math.pow(xn/a,2))*100;
 			//alert(Math.sqrt(parseInt( b*(b*(1-(speed*speed)/(a*a) ) ) )));
-
-
 			if(parseInt(oEar.style.left) > x1)
 			{
-
 				heading = false;
 			}
 			else if(parseInt(oEar.style.left) < x0)
@@ -135,15 +156,13 @@
 			}
 			//alert(parseint(oEar.style.top));
 		}
+
 		init();
-		timer = setInterval(move,10);
 
+			timer = setInterval(move,8);
+		
 		/*test*/
-
 	}
-
-
-
 	</script>
 
 
@@ -151,8 +170,12 @@
 <body>
 		
 
-	<div id="Line"></div>
-	<div id="earth"></div>
+	<div id="Line1">
+		<div id = "Line2"></div>
+		<a href="https://baike.baidu.com/item/%E6%9C%88%E7%90%83/30767?fr=aladdin" target="_blank"><div id = "moon"></div></a>
+		<a href="https://baike.baidu.com/item/%E5%A4%AA%E9%98%B3/24010?fr=aladdin" target="_blank"><div id = "sun"></div></a>
+	</div>
+	<a href="https://baike.baidu.com/item/%E5%9C%B0%E7%90%83/6431" target="_blank"><div id="earth"></div></a>
 
 </body>
 </html>

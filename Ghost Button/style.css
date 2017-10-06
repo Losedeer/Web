@@ -73,10 +73,10 @@ body{
 	display: block;
 	background: url(./img/touch.png) no-repeat;
 	margin: 0 auto;
-	transition:all 0.2s;
-	-webkit-transition:all 0.2s;
-	-o-transition:all 0.2s;
-	-moz-transition:all 0.2s;
+	transition:all 0.2s;			<!--已实现反转效果为360度 但看不出来 需要添加过渡效果 transition-->
+	-webkit-transition:all 0.2s;	<!--兼容google apple浏览器-->
+	-o-transition:all 0.2s;			<!--兼容欧朋浏览器-->
+	-moz-transition:all 0.2s;		<!--兼容火狐浏览器-->	
 }
 
 .box-touch .icon:hover{

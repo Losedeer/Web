@@ -15,5 +15,3 @@
 	css  
 	-An excellent source of creative learning and netease cloud class
 	
-### 5.Personal Website
-	css/js/Ajax/bootstrap

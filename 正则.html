@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<!--  -->
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+	<!-- 新 Bootstrap 核心 CSS 文件 -->
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<title>正则博客(贪婪)</title>
+
+	<style>
+
+		body{
+
+			height: 4000px;
+		}
+		p{
+			font-size: 17px;
+			color: rgb(100,181,135);
+		}
+		dl{
+			font-size: 15px;
+			font-family:Microsoft Yahei;
+			color: rgb(100,181,135);
+		}
+		dd{
+			font-size: 15px;	
+			font-family:Microsoft Yahei;		
+			color:#FF6347;
+		}
+		.annotation{
+			color: gray;
+			
+		}
+		.blankLine{
+			height: 100px;
+		}
+
+
+	</style>
+</head>
+<body>
+	
+	<div class = "container">
+		
+
+		<h1 class = "page-header">cookie:</h1>
+			<h3>页面用来保存信息(自动登录,记住用户名)</h3>
+			<br>
+			<br>
+			<h3>cookie特性：</h3>
+			<br>
+			<p class = "text-left">同一个域名共享同一个cookie</p>
+			<br>
+			<p class = "text-left">数量，大小有限</p>
+			<br>
+			<p class = "text-left">时间限制</p>
+			<br>
+			<br>
+			<h3>JS使用cookie：</h3>
+			<br>
+			<p class = "text-left">document.cookie</p>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+			<br>
+		<h1 class = "page-header">正则</h1>
+			<h3>字符串方法:</h3>
+			<h4 class= "text-danger">注：字符串的多个返回结果为数组,每个不相邻的字符串在不用的[i]里！！！！！</h4>
+			<br>
+			<dl class = "dl-horizontal">
+				<dt>strObject.search(x)</dt>
+				<dd>search() 方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串;</dd>
+				<dd>x可以为要寻找的字符串或者正则表达式，返回匹配到的第一个位置,若无返回 -1;</dd>
+			</dl>
+			<br>
+			<dl class = "dl-horizontal">
+				<dt>strObject.substring(x,y)</dt>
+				<dd>substring() 方法用于提取字符串中介于两个指定下标之间的字符;</dd>
+				<dd>x为开始截取位置,y为结尾（不包括y!!）返回截取字符串;</dd>
+			</dl>
+			<br>
+			<dl class = "dl-horizontal">
+				<dt>strObject.split(x,y)</dt>
+				<dd>split() 方法用于把一个字符串分割成字符串数组;</dd>
+				<dd>与join方法相反，将含有x两边的两边进行分割，返回字符串;y为最大分割上限</dd>
+			</dl>
+			<br>
+			<dl class = "dl-horizontal">
+				<dt>strObject.charAt(x)</dt>
+				<dd>charAt() 方法可返回指定位置的字符;</dd>
+				<dd>返回str字符串在 x 位置的字符;</dd>
+			</dl>
+			<br>
+			<dl class = "dl-horizontal">
+				<dt>strObject.march(x)</dt>
+				<dd>match() 方法可在字符串内检索指定的值，或找到一个或多个正则表达式的匹配;</dd>
+				<dd>x为字符串或者是正则表达式，返回所匹配的字符串,配合//g 可返回多个 若无返回null;</dd>
+			</dl>
+			<br>
+			<dl class = "dl-horizontal">
+				<dt>strObject.replace(x,y)</dt>
+				<dd>replace() 方法用于在字符串中用一些字符替换另一些字符，或替换一个与正则表达式匹配的子串;</dd>
+				<dd>x,y为字符串或者正则,字符串里的x用y替换;</dd>
+			</dl>
+
+			<br>
+			<br>
+			<br>
+			<br>
+			<h3>RegExp对象:</h3>
+			<br>
+			<h4>JS写法:</h4>
+			<code>
+		    var re = new RegExp('abc');
+			<br>
+			var str = "dddabceeeDg";
+			<br>
+			console.log("abc出现在dddabceeeDg的第" + str.search(re) + "个位置上"); 
+			</code>
+
+			<br>
+			<br>
+			<br>
+			<br>
+			<h4>perl写法:</h4>
+			<code>
+		    var pe = /edg/;
+			<br>
+			console.log("edg出现在dddabceeeDg的第" + str.search(pe) + "个位置上");
+			</code>
+
+			<br>
+			<br>
+			<br>
+			<br>
+			<h3>相关规则:</h3>
+			<br>
+			<br>
+			<h4>类型:</h4>
+			<h4 class = "text-danger">注：一般大写形式为 非 的意思(\D 非数字)</h4>
+			<br>
+			<p>\d:数字 <br><br>\w:匹配字母或数字或下划线或汉字 等价于 '[^A-Za-z0-9_]' <br><br>\s 匹配任意的空白符</p>
+			<br><br>
+			<h4>匹配规则:</h4>
+			<br>
+			<p>i:ignore忽略大小写; <br><br>g:全局匹配<br><br>m:多行匹配</p>
+			<br>
+			<br>
+			<br>
+			<h4>量词:</h4>
+			<br>
+			<p>.&nbsp;:任意字符<mark>(最好别用)</mark><br><br>+&nbsp;:若干 <br><br>|&nbsp;:或<br><br>^&nbsp;: 行首（若出现在 [ ]中则是 非）<br><br>$&nbsp;:行尾 <br><br>?&nbsp;:可有可无<br><br>-&nbsp;:范围<br><br>{n}&nbsp;:正好出现n次<br><br>{n,m}&nbsp;:至少出现n次,最多出现m次(m空则为无上限)<br><br>*&nbsp;:任意次<mark>(最好别用)</mark><br><br>[&nbsp;]&nbsp;:元字符(方括号): [abc]p 也有或的意思,模糊包含(ap,bp,cp)都可以(不包括abcp)<br><br>	\&nbsp;:转义(邮箱中的"." -> \.)(/d 本身 //d)</p>
+			<br>
+			<br>
+			<br>
+			<br>
+			<h3>正则方法:</h3>
+			<br><br>
+			<h4>test()</h4>
+			<dl>
+				<dd class = "annotation">//检测字符串 str 符不符合 re 创造的规则(符合:返回ture,反之亦然)</dd>
+				<dt>re.test(str)</dt>
+				<dd class = "text-danger">注:test()方法会检测整个字符串中符不符合,不管从什么位置开始</dd>
+			</dl>
+			
+			<div class = "blankLine"></div>
+
+			<form>
+				<div class = "form-group" id = "form_1">
+					<label for="email_1"></label>
+					<input type="eamil" class = "form-control" id = "email_1" placeholder="Eamil">
+				</div>
+			</form>
+			<!-- button不能放到 form 里会提交刷新网页的 -->
+			<button class = "btn btn-info" id = "btn_1">Submit</button>
+
+	</div>
+
+
+
+	<script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+	<script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+
+	<script>
+
+		
+		//正则 JS写法
+		// 第二个参数为搜索规则：i:ignore忽略大小写; g:全局匹配
+		var str1 = "dd<p>dabceeeDg123 fwef2343545 12fwb345 545fewc<\p>a";
+		var re = new RegExp('abc','i');
+
+		console.log("abc出现在str1的第" + str1.search(re) + "个位置上");
+
+		//正则 perl写法
+		//  后面的 "/" 之后的为搜索规则：i:ignore忽略大小写; g:全局匹配
+		var pe = /edg/i;
+		console.log("edg出现在str1的第" + str1.search(pe) + "个位置上");
+
+		//查找所有数字
+		var num = /\d+/g;
+		console.log("str1中的数字有" + str1.match(num));
+
+		//将数字全都替换成0 (不影响原字符串)
+		//敏感词过滤
+		var to0 = /\d+/g;
+		console.log("将数字全部替换成0为" + str1.replace(to0,'0'));
+
+		//选出以f或w为开头的,后面为e的字符串([fw]不包括 "fw"！！！)
+		var fw_e = /[fw]e/g;
+		console.log("str1中开头有f或w后面为e的有" + str1.match(fw_e));
+
+		//去掉网页源码中所有的标签
+		//正则贪婪特性 若是没有 [^<>+] 而是直接 <>它会用<html>的 < 到 </html>的 >!!
+		var remTag =  /<[^<>]+>/g;
+		console.log("去掉所有的标签后为" + str1.replace(remTag,''));
+		//alert(str1);
+
+
+		//检测邮箱  
+		//数字，下划线，字母 + @ 字母，数字 + . 字母+
+		var oForm = document.getElementById('form_1');
+
+		var oTxt = document.getElementById('email_1');
+		var oBtn = document.getElementById('btn_1');
+
+
+		oBtn.onclick = function() {
+			
+			var reEmail =  /^\w+@[a-z0-9]+\.[a-z]+$/im;
+
+			if(reEmail.test(oTxt.value))
+			{
+				// 获取 class 的属性为 .className
+				oForm.className = "form-group has-success";
+			}
+			else
+			{
+				oForm.className = "form-group has-error";
+			}
+		}
+
+
+	</script>
+
+</body>
+</html>

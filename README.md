@@ -1,4 +1,4 @@
-# Web  努力啊～～
+
 
 ## Project List
 
@@ -15,10 +15,4 @@
 	css  
 	-An excellent source of creative learning and netease cloud class
 	
-### 5.Chat Room
-	java/web／SQL
 
-
-#########################################################
-
-# Pullpage.js (Record)
